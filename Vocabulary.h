@@ -61,5 +61,7 @@ public:
 
     bool isEmpty();
 
+    std::vector<const Word *> getVocabulary() const;
+
     static int getHoursOfPhase(int phase);
 };

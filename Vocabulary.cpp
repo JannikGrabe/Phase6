@@ -232,6 +232,17 @@ bool Vocabulary::isEmpty()
     return this->vocabulary.size() == 0;
 }
 
+std::vector<const Word *> Vocabulary::getVocabulary() const
+{
+    std::vector<const Word*> constVocab;
+
+    foreach(Word * word, this->vocabulary) {
+        constVocab.push_back(dynamic_cast<const Word*>(word));
+    }
+
+    return constVocab;
+}
+
 int Vocabulary::getHoursOfPhase(int phase)
 {
     switch(phase) {
