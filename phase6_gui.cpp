@@ -66,6 +66,7 @@ void Phase6_GUI::on_pb_next_clicked()
     this->ui->le_answer->setFocus();
     this->ui->pb_next->setText("Nächstes Wort");
     this->ui->pb_edit->setDisabled(true);
+    this->ui->pb_overview->setDisabled(true);
     this->ui->te_solution->hide();
     this->ui->le_answer->show();
     this->ui->le_question->show();
@@ -128,6 +129,7 @@ void Phase6_GUI::on_le_answer_returnPressed()
     }
 
     this->ui->pb_edit->setDisabled(false);
+    this->ui->pb_overview->setDisabled(false);
 
     QString enteredWord = this->ui->le_answer->text();
     std::vector<QString> right_answer;
