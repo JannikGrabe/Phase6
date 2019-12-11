@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>590</width>
+    <width>864</width>
     <height>682</height>
    </rect>
   </property>
@@ -18,6 +18,9 @@
   </property>
   <property name="windowTitle">
    <string>Übersicht</string>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>

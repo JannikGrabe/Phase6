@@ -23,6 +23,7 @@ private:
 	Phase6_GUI* gui = nullptr;
 
     std::random_device dev;
+    std::mt19937 generator;
 
     bool file_read = false;
 

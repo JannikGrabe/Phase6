@@ -2,6 +2,7 @@
 #include "ui_dialog_overview.h"
 #include "phase6_gui.h"
 #include <chrono>
+#include <iostream>
 
 Dialog_Overview::Dialog_Overview(Phase6_GUI *gui) :
     QDialog(gui),
@@ -46,7 +47,8 @@ Dialog_Overview::Dialog_Overview(Phase6_GUI *gui) :
         tableWidth += this->ui->tw_overview->columnWidth(i);
     }
 
-    this->ui->tw_overview->resize(tableWidth, this->size().height());
+    this->resize(tableWidth + 50, this->size().height());
+
     this->ui->l_total_count->setText(QString::number(vocab.size()));
     this->ui->l_phase1_count->setText(QString::number(counts[0]));
     this->ui->l_phase2_count->setText(QString::number(counts[1]));

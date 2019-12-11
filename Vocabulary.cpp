@@ -143,7 +143,6 @@ Word * Vocabulary::randomlyChooseWord() {
 		return nullptr;
 	}
 
-    std::default_random_engine generator(this->dev());
     std::uniform_int_distribution<unsigned int> distribution(0, size - 1 );
 
     return ready[distribution(generator)];
@@ -157,6 +156,8 @@ Vocabulary::Vocabulary(Phase6_GUI * gui) {
         std::cout << "Could not open file" << std::endl;
         this->file_read = true;
     }
+
+    this->generator.seed(time(0));
 }
 
 
