@@ -17,9 +17,11 @@ public:
     explicit Dialog_Overview(Phase6_GUI* gui);
     ~Dialog_Overview();
 
+private slots:
+    void on_pb_close_clicked();
+
 private:
     Ui::Dialog_Overview *ui;
-    Phase6_GUI* gui;
 };
 
 #endif // DIALOG_OVERVIEW_H
