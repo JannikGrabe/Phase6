@@ -5,6 +5,7 @@
 #include <Vocabulary.h>
 #include "dialog_app.h"
 #include "dialog_edit.h"
+#include "dialog_overview.h"
 
 namespace Ui {
 class Phase6_GUI;
@@ -33,6 +34,8 @@ private slots:
 
     void on_le_answer_returnPressed();
 
+    void on_pb_overview_clicked();
+
 private:
     Ui::Phase6_GUI *ui;
 
@@ -40,6 +43,7 @@ private:
 
     Dialog_App* dialog_add;
     Dialog_Edit* dialog_edit;
+    Dialog_Overview* dialog_overview;
 
     std::random_device dev;
 

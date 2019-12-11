@@ -30,19 +30,22 @@ SOURCES += \
     Vocabulary.cpp \
     Word.cpp \
     dialog_app.cpp \
-    dialog_edit.cpp
+    dialog_edit.cpp \
+    dialog_overview.cpp
 
 HEADERS += \
         phase6_gui.h \
     Vocabulary.h \
     Word.h \
     dialog_app.h \
-    dialog_edit.h
+    dialog_edit.h \
+    dialog_overview.h
 
 FORMS += \
         phase6_gui.ui \
     dialog_app.ui \
-    dialog_edit.ui
+    dialog_edit.ui \
+    dialog_overview.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

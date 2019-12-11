@@ -203,3 +203,9 @@ void Phase6_GUI::on_le_answer_returnPressed()
     this->vocab->giveAnswer(this->currentWord, answer);
 }
 
+
+void Phase6_GUI::on_pb_overview_clicked()
+{
+    this->dialog_overview = new Dialog_Overview(this);
+    this->dialog_overview->show();
+}
