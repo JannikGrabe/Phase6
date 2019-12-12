@@ -11,9 +11,7 @@
     <TargetDir>@HomeDir@/Phase6</TargetDir>
     <RemoteRepositories>
         <Repository>
-            <Url>https://git.fh-aachen.de/jg9537s/phase6/tree/v2.0/Deployment/installer_files/package_repo</Url>
-            <Enabled>1</Enabled>
-            <DisplayName>Phase6 repository</DisplayName>
+            <Url>github.com/JannikGrabe/Phase6/tree/v2.0/Deployment/installer_files/package_repo</Url>
         </Repository>
     </RemoteRepositories>
 </Installer> 
