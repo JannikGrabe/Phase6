@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Phase 6</Name>
+    <Version>1.0.0</Version>
+    <Title>Phase 6 Installer</Title>
+    <Publisher>Jannik</Publisher>
+    <WizardStyle>Modern</WizardStyle>
+    <InstallerWindowIcon>six.png</InstallerWindowIcon>
+    <InstallerApplicationIcon>icon</InstallerApplicationIcon>
+    <Logo>six.png></Logo>
+    <TargetDir>@HomeDir@/Phase6</TargetDir>
+    <RemoteRepositories>
+        <Repository>
+            <Url>https://github.com/JannikGrabe/Phase6/tree/v2.0/Deployment/package_repo</Url>
+        </Repository>
+    </RemoteRepositories>
+</Installer> 
