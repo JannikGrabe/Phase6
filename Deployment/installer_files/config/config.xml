@@ -11,7 +11,7 @@
     <TargetDir>@HomeDir@/Phase6</TargetDir>
     <RemoteRepositories>
         <Repository>
-            <Url>https://github.com/JannikGrabe/Phase6/tree/v2.0/Deployment/package_repo</Url>
+            <Url>https://github.com/JannikGrabe/Phase6/tree/v2.0/Deployment/package_repo/</Url>
         </Repository>
     </RemoteRepositories>
 </Installer> 

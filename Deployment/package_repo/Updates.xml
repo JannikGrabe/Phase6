@@ -10,8 +10,8 @@
   <ReleaseDate>2019-12-12</ReleaseDate>
   <Default>script</Default>
   <Script>installscript.qs</Script>
-  <UpdateFile UncompressedSize="57699636" CompressedSize="15755664" OS="Any"/>
+  <UpdateFile CompressedSize="15755742" OS="Any" UncompressedSize="57699636"/>
   <DownloadableArchives>Phase6.7z</DownloadableArchives>
-  <SHA1>8b9f6572ed8840868bf977d9b390c95e9fb12007</SHA1>
+  <SHA1>db325bdf17c97cde89ec784262ef52ccded8d96a</SHA1>
  </PackageUpdate>
 </Updates>
