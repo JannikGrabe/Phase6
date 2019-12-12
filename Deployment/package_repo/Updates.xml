@@ -1,0 +1,17 @@
+<Updates>
+ <ApplicationName>{AnyApplication}</ApplicationName>
+ <ApplicationVersion>1.0.0</ApplicationVersion>
+ <Checksum>true</Checksum>
+ <PackageUpdate>
+  <Name>de.jannik.root</Name>
+  <DisplayName>Phase 6</DisplayName>
+  <Description>Phase 6</Description>
+  <Version>0.1.0-1</Version>
+  <ReleaseDate>2019-12-12</ReleaseDate>
+  <Default>script</Default>
+  <Script>installscript.qs</Script>
+  <UpdateFile UncompressedSize="57699636" CompressedSize="15755664" OS="Any"/>
+  <DownloadableArchives>Phase6.7z</DownloadableArchives>
+  <SHA1>8b9f6572ed8840868bf977d9b390c95e9fb12007</SHA1>
+ </PackageUpdate>
+</Updates>
