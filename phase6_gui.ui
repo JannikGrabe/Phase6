@@ -149,7 +149,7 @@
          <bool>true</bool>
         </property>
         <property name="placeholderText">
-         <string>update test</string>
+         <string/>
         </property>
         <property name="clearButtonEnabled">
          <bool>false</bool>
