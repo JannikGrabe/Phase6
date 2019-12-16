@@ -6,6 +6,7 @@
 #include <QTextStream>
 #include <QCoreApplication>
 #include <QMessageBox>
+#include <QDir>
 
 //if time is expired add word ready
 
@@ -64,8 +65,10 @@ void Vocabulary::updateReady() {
 
 bool Vocabulary::readVocabFromFile() {
 
-    QString path = QCoreApplication::applicationDirPath();
-    QFile* file = new QFile("../" + path + "/vocab.voc");
+    QString dir_path = QCoreApplication::applicationDirPath();
+    QDir dir(dir_path);
+    QString path = dir.relativeFilePath("../vocab.voc");
+    QFile* file = new QFile(path);
 
     if (!file->open(QFile::ReadOnly)) return false;
 
@@ -102,8 +105,10 @@ bool Vocabulary::readVocabFromFile() {
 
 bool Vocabulary::writeVocabToFile() {
 
-    QString path = QCoreApplication::applicationDirPath();
-    QFile* file = new QFile("../" + path + "/vocab.voc");
+    QString dir_path = QCoreApplication::applicationDirPath();
+    QDir dir(dir_path);
+    QString path = dir.relativeFilePath("../vocab.voc");
+    QFile* file = new QFile(path);
 
     if (!file->open(QFile::WriteOnly))
 		return false;
