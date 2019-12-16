@@ -6,12 +6,12 @@
   <Name>de.jannik.root</Name>
   <DisplayName>Phase 6</DisplayName>
   <Description>Phase 6</Description>
-  <Version>0.1.0-2</Version>
+  <Version>0.2.0-1</Version>
   <ReleaseDate>2019-12-12</ReleaseDate>
   <Default>script</Default>
   <Script>installscript.qs</Script>
-  <UpdateFile OS="Any" CompressedSize="15791739" UncompressedSize="57956834"/>
+  <UpdateFile CompressedSize="15791674" UncompressedSize="57955268" OS="Any"/>
   <DownloadableArchives>Phase6.7z,content.7z</DownloadableArchives>
-  <SHA1>e3e30c95b3da115eae2efbdaa2d4661a5b70f444</SHA1>
+  <SHA1>328f02137054dcd86ad830e7f89ec5947f6dd2f3</SHA1>
  </PackageUpdate>
 </Updates>
