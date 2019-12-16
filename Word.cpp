@@ -1,6 +1,5 @@
 #include "Word.h"
 #include <chrono>
-#include <iostream>
 
 void Word::setTime() {
     this->time = std::chrono::duration_cast<std::chrono::hours>(std::chrono::system_clock::now().time_since_epoch()).count();

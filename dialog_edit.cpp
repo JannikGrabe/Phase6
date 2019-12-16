@@ -3,7 +3,6 @@
 #include "phase6_gui.h"
 
 #include <QMessageBox>
-#include <iostream>
 
 Dialog_Edit::Dialog_Edit(Phase6_GUI *phase6_gui, Word* word) :
     QDialog(phase6_gui),

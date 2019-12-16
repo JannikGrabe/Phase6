@@ -3,14 +3,6 @@
 #include <vector>
 #include <random>
 
-/* TO DO:
-	- FileErrorException 
-	done - add Time
-	done - impl updateReady
-	done - impl readToFile
-	done - impl writeToFile
-*/
-
 class Phase6_GUI;
 
 // class that contains all the words

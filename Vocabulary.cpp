@@ -1,11 +1,7 @@
 #include "Vocabulary.h"
 #include "Phase6_GUI.h"
 
-
-#include <fstream>
 #include <chrono>
-#include <algorithm>
-#include <iostream>
 #include <QFile>
 #include <QTextStream>
 #include <QCoreApplication>
@@ -152,10 +148,7 @@ Vocabulary::Vocabulary(Phase6_GUI * gui) {
 	this->gui = gui;
 
 	// init vocab and ready
-    if(!this->readVocabFromFile()) {
-        std::cout << "Could not open file" << std::endl;
-        this->file_read = true;
-    }
+    this->readVocabFromFile();
 
     this->generator.seed(time(0));
 }
@@ -205,9 +198,7 @@ void Vocabulary::finish() {
         return;
     }
 
-    if(!this->writeVocabToFile()) {
-        std::cout << "Could not open file" << std::endl;
-    }
+    this->writeVocabToFile();
 }
 
 int Vocabulary::getTimeUntilNext()

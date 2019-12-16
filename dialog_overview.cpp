@@ -2,7 +2,6 @@
 #include "ui_dialog_overview.h"
 #include "phase6_gui.h"
 #include <chrono>
-#include <iostream>
 
 Dialog_Overview::Dialog_Overview(Phase6_GUI *gui) :
     QDialog(gui),

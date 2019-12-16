@@ -1,6 +1,5 @@
 #include "phase6_gui.h"
 #include "ui_phase6_gui.h"
-#include <iostream>
 
 Phase6_GUI::Phase6_GUI(QWidget *parent) :
     QMainWindow(parent),
