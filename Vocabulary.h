@@ -17,8 +17,6 @@ private:
     std::random_device dev;
     std::mt19937 generator;
 
-    bool file_read = false;
-
 	//if time is expired add word ready
 	void updateReady();
 

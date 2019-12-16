@@ -47,7 +47,7 @@ private:
 
     std::random_device dev;
 
-    bool lang1 = false;
+    bool lang1 = true;
     bool currentStateLang1 = true;
 
     bool compare(QString w1, std::vector<QString> w2);

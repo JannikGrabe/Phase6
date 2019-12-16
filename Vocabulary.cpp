@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QCoreApplication>
+#include <QMessageBox>
 
 //if time is expired add word ready
 
@@ -93,7 +94,6 @@ bool Vocabulary::readVocabFromFile() {
         return false;
     }
 
-    this->file_read = true;
 	return true;
 }
 
@@ -194,10 +194,6 @@ void Vocabulary::giveAnswer(Word* word, bool answer) {
 // done studying
 
 void Vocabulary::finish() {
-    if(!this->file_read) {
-        return;
-    }
-
     this->writeVocabToFile();
 }
 
