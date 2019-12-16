@@ -12,6 +12,6 @@
   <Script>installscript.qs</Script>
   <UpdateFile OS="Any" UncompressedSize="57958607" CompressedSize="15793463"/>
   <DownloadableArchives>Phase6.7z,content.7z</DownloadableArchives>
-  <SHA1>e90c91899954fa19e81e0ff773dd69a334eabf4c</SHA1>
+  <SHA1>90e6af6e56dca878741f44ea8e539f8524ce2b52</SHA1>
  </PackageUpdate>
 </Updates>
