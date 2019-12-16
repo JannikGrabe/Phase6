@@ -65,7 +65,7 @@ void Vocabulary::updateReady() {
 bool Vocabulary::readVocabFromFile() {
 
     QString path = QCoreApplication::applicationDirPath();
-    QFile* file = new QFile(path + "/vocab.voc");
+    QFile* file = new QFile("../" + path + "/vocab.voc");
 
     if (!file->open(QFile::ReadOnly)) return false;
 
@@ -103,7 +103,7 @@ bool Vocabulary::readVocabFromFile() {
 bool Vocabulary::writeVocabToFile() {
 
     QString path = QCoreApplication::applicationDirPath();
-    QFile* file = new QFile(path + "/vocab.voc");
+    QFile* file = new QFile("../" + path + "/vocab.voc");
 
     if (!file->open(QFile::WriteOnly))
 		return false;
