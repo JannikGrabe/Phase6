@@ -26,7 +26,10 @@ void Phase6_GUI::on_pb_add_clicked()
 }
 
 bool Phase6_GUI::compare(QString w1, std::vector<QString> w2) {
+
+    w1 = w1.toLower();
     foreach(QString s, w2) {
+        s = s.toLower();
         if(w1 == s) {
             return true;
         }

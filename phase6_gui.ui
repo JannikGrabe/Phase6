@@ -259,7 +259,7 @@
              <item row="0" column="0">
               <widget class="QRadioButton" name="rb_lang1">
                <property name="text">
-                <string>Türkisch</string>
+                <string>Englisch</string>
                </property>
               </widget>
              </item>
