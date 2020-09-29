@@ -105,14 +105,22 @@ bool Vocabulary::readVocabFromFileXML() {
     QString dir_path = QCoreApplication::applicationDirPath();
     QDir dir(dir_path);
     QString path = dir.relativeFilePath("../vocab.xml");
+    QString path2 = dir.relativeFilePath("../vocab.voc");
 
     QFile file(path);
+
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        if(readVocabFromFile()) {
+            this->writeVocabToFileXML();
+            QFile old_file(path2);
+            old_file.remove();
+            return true;
+        }
         QMessageBox::warning(this->gui,
             "Load XML File Problem",
-            "Couldn't load the vocabulary",
+            "Couldn't load the vocabulary.",
             QMessageBox::Ok);
-        return false;
+            return false;
     }
 
    if (!doc.setContent(&file)) {
