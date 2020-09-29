@@ -254,6 +254,34 @@ bool Vocabulary::writeDomDocumentToFile() {
 }
 // choose a word from the ready list randomly
 
+QDomElement Vocabulary::createXMLWordElement(Word* word) {
+
+    QDomElement wordElement = this->doc.createElement("word");
+    wordElement.setAttributeNode(doc.createAttribute("id"));
+    wordElement.setAttributeNode(doc.createAttribute("time"));
+    wordElement.setAttributeNode(doc.createAttribute("phase"));
+
+    wordElement.setAttribute("id", QString::number(word->id));
+    wordElement.setAttribute("time", QString::number(word->getTime()));
+    wordElement.setAttribute("phase", QString::number(word->getPhase()));
+
+    for(int i = 0; i < word->lang1.size(); i++) {
+        QDomElement langElement = this->doc.createElement("lang1");
+        QDomText text = doc.createTextNode(word->lang1[i]);
+        langElement.appendChild(text);
+        wordElement.appendChild(langElement);
+    }
+
+    for(int i = 0; i < word->lang2.size(); i++) {
+        QDomElement langElement = this->doc.createElement("lang2");
+        QDomText text = doc.createTextNode(word->lang2[i]);
+        langElement.appendChild(text);
+        wordElement.appendChild(langElement);
+    }
+
+    return wordElement;
+}
+
 Word * Vocabulary::randomlyChooseWord() {
     unsigned int size = this->ready.size();
 
@@ -283,28 +311,12 @@ void Vocabulary::addWord(std::vector<QString> lang1, std::vector<QString> lang2)
     word->id = this->current_id;
     this->vocabulary.push_back(word);
 
+    QDomElement wordElement = this->createXMLWordElement(word);
+
     QDomNode root = doc.namedItem("Vocabulary");
+    root.appendChild(wordElement);
 
-    QDomElement wordElement = this->doc.createElement("word");
-    wordElement.setAttributeNode(doc.createAttribute("id"));
-    wordElement.setAttributeNode(doc.createAttribute("time"));
-    wordElement.setAttributeNode(doc.createAttribute("phase"));
-
-    wordElement.setAttribute("id", QString::number(this->current_id));
-    wordElement.setAttribute("time", QString::number(0));
-    wordElement.setAttribute("phase", QString::number(1));
-
-    for(int i = 0; i < lang1.size(); i++) {
-        QDomElement langElement = this->doc.createElement("lang1");
-        langElement.setNodeValue(lang1[i]);
-        wordElement.appendChild(langElement);
-    }
-
-    for(int i = 0; i < lang1.size(); i++) {
-        QDomElement langElement = this->doc.createElement("lang2");
-        langElement.setNodeValue(lang2[i]);
-        wordElement.appendChild(langElement);
-    }
+    this->writeDomDocumentToFile();
 
     current_id++;
 }
@@ -313,12 +325,40 @@ void Vocabulary::editWord(Word* word, std::vector<QString> lang1, std::vector<QS
 {
     word->lang1 = lang1;
     word->lang2 = lang2;
+
+    QDomElement new_word = this->createXMLWordElement(word);
+
+    QDomNode root = doc.namedItem("Vocabulary");
+    QDomNodeList children = root.childNodes();
+
+    for(int i = 0 ; i < children.count(); i++) {
+        if(children.at(i).toElement().attributes().namedItem("id").nodeValue().toUInt() == word->id) {
+            root.replaceChild(new_word, children.at(i).toElement());
+            break;
+        }
+    }
+
+    this->writeDomDocumentToFile();
 }
 
 void Vocabulary::deleteWord(Word *word) {
+    unsigned int word_id = word->id;
+
     std::vector<Word*>::iterator position = std::find(this->vocabulary.begin(), this->vocabulary.end(), word);
     if (position != this->vocabulary.end()) // == myVector.end() means the element was not found
         this->vocabulary.erase(position);
+
+    QDomNode root = doc.namedItem("Vocabulary");
+    QDomNodeList children = root.childNodes();
+
+    for(int i = 0 ; i < children.count(); i++) {
+        if(children.at(i).toElement().attributes().namedItem("id").nodeValue().toUInt() == word_id) {
+            root.removeChild(children.at(i).toElement());
+            break;
+        }
+    }
+
+    this->writeDomDocumentToFile();
 }
 
 // pick and remove one word from ready
@@ -343,6 +383,8 @@ void Vocabulary::giveAnswer(Word* word, bool answer) {
     else {
         word->resetPhase();
     }
+
+    this->editWord(word, word->lang1, word->lang2);
 }
 
 // done studying

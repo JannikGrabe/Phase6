@@ -39,6 +39,7 @@ private:
 
 
     bool writeDomDocumentToFile();
+    QDomElement createXMLWordElement(Word *word);
 public:
 	Vocabulary(Phase6_GUI* gui);
 
