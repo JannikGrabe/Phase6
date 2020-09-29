@@ -27,6 +27,8 @@ private:
 	// sprache1 sprache2 phase time ready \n
 	bool writeVocabToFile();
 
+     bool writeVocabToFileXML();
+
 	// choose a word from the ready list randomly
 	Word* randomlyChooseWord();
 
@@ -58,4 +60,5 @@ public:
     std::vector<const Word *> getVocabulary() const;
 
     static int getHoursOfPhase(int phase);
+
 };

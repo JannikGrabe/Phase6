@@ -7,6 +7,7 @@
 #include <QCoreApplication>
 #include <QMessageBox>
 #include <QDir>
+#include <QXmlStreamWriter>
 
 //if time is expired add word ready
 
@@ -137,6 +138,41 @@ bool Vocabulary::writeVocabToFile() {
     return true;
 }
 
+bool Vocabulary::writeVocabToFileXML() {
+    // open normal file
+    QString dir_path = QCoreApplication::applicationDirPath();
+    QDir dir(dir_path);
+    QString path = dir.relativeFilePath("../vocab.xml");
+    QFile file(path);
+    file.open(QIODevice::WriteOnly);
+
+    QXmlStreamWriter xml(&file);
+    xml.setAutoFormatting(true);
+    xml.writeStartDocument();
+
+    for(unsigned int i = 0; i < this->vocabulary.size(); i++) {
+        xml.writeStartElement("word");
+        xml.writeAttribute("id", QString::number(i));
+        xml.writeAttribute("phase", QString::number(this->vocabulary[i]->getPhase()));
+        xml.writeAttribute("time", QString::number(this->vocabulary[i]->getTime()));
+
+        for(unsigned int j = 0; j < this->vocabulary[i]->lang1.size(); j++) {
+            xml.writeTextElement("lang1",  this->vocabulary[i]->lang1[j]);
+        }
+
+        for(unsigned int j = 0; j < this->vocabulary[i]->lang2.size(); j++) {
+            xml.writeTextElement("lang2",  this->vocabulary[i]->lang2[j]);
+        }
+
+        xml.writeEndElement();
+    }
+
+    xml.writeEndDocument();
+
+    file.close();
+    return true;
+}
+
 // choose a word from the ready list randomly
 
 Word * Vocabulary::randomlyChooseWord() {
@@ -208,6 +244,7 @@ void Vocabulary::giveAnswer(Word* word, bool answer) {
 
 void Vocabulary::finish() {
     this->writeVocabToFile();
+    this->writeVocabToFileXML();
 }
 
 int Vocabulary::getTimeUntilNext()

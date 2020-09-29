@@ -5,6 +5,8 @@
 
 class Word {
 public :
+    unsigned int id = 0;
+
     std::vector<QString> lang1;
     std::vector<QString> lang2;
 
