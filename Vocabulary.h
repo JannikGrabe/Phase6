@@ -2,6 +2,7 @@
 #include "Word.h"
 #include <vector>
 #include <random>
+#include <QDomDocument>
 
 class Phase6_GUI;
 
@@ -11,6 +12,8 @@ class Vocabulary {
 private:
 	std::vector<Word*> vocabulary;
 	std::vector<Word*> ready;
+    unsigned int current_id = 0;
+    QDomDocument doc;
 
 	Phase6_GUI* gui = nullptr;
 
@@ -23,6 +26,8 @@ private:
 	// reads words from file "vocab.voc" and adds to vocab
 	bool readVocabFromFile();
 
+     bool readVocabFromFileXML();
+
 	// writes vocab to file "vocab.voc":
 	// sprache1 sprache2 phase time ready \n
 	bool writeVocabToFile();
@@ -32,6 +37,8 @@ private:
 	// choose a word from the ready list randomly
 	Word* randomlyChooseWord();
 
+
+    bool writeDomDocumentToFile();
 public:
 	Vocabulary(Phase6_GUI* gui);
 

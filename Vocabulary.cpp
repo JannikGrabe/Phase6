@@ -66,8 +66,6 @@ void Vocabulary::updateReady() {
 
 bool Vocabulary::readVocabFromFile() {
 
-    this->vocabulary.clear();
-
     QString dir_path = QCoreApplication::applicationDirPath();
     QDir dir(dir_path);
     QString path = dir.relativeFilePath("../vocab.voc");
@@ -102,6 +100,65 @@ bool Vocabulary::readVocabFromFile() {
 
 	return true;
 }
+
+bool Vocabulary::readVocabFromFileXML() {
+    QString dir_path = QCoreApplication::applicationDirPath();
+    QDir dir(dir_path);
+    QString path = dir.relativeFilePath("../vocab.xml");
+
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::warning(this->gui,
+            "Load XML File Problem",
+            "Couldn't load the vocabulary",
+            QMessageBox::Ok);
+        return false;
+    }
+
+   if (!doc.setContent(&file)) {
+       QMessageBox::warning(this->gui,
+           "Parsing Problem",
+           "Couldn't read the vocabulary file",
+           QMessageBox::Ok);
+       return false;
+   }
+
+   file.close();
+
+   QDomNode root = doc.namedItem("Vocabulary");
+   QDomNodeList wordElements = root.childNodes();
+
+
+   for(int i = 0; i < wordElements.count(); i++) {
+
+       QDomNode wordElement = wordElements.at(i);
+
+       QDomNodeList langElements = wordElement.childNodes();
+
+       std::vector<QString> lang1;
+       std::vector<QString> lang2;
+       for(int j = 0; j < langElements.count(); j++) {
+           QDomElement elem = langElements.at(j).toElement();
+           if(elem.tagName() == "lang1") {
+               lang1.push_back(elem.text());
+           }
+           if(elem.tagName() == "lang2") {
+               lang2.push_back(elem.text());
+           }
+       }
+
+       Word* word = new Word(lang1, lang2);
+       word->id = wordElement.attributes().namedItem("id").nodeValue().toUInt();
+       word->setTime(wordElement.attributes().namedItem("time").nodeValue().toUInt());
+       word->setPhase(wordElement.attributes().namedItem("phase").nodeValue().toInt());
+       this->vocabulary.push_back(word);
+       this->current_id = i;
+   }
+
+   this->current_id++;
+   return true;
+}
+
 
 // writes vocab to file "vocab.voc":
 // sprache1 sprache2 phase time \n
@@ -149,7 +206,7 @@ bool Vocabulary::writeVocabToFileXML() {
     QXmlStreamWriter xml(&file);
     xml.setAutoFormatting(true);
     xml.writeStartDocument();
-
+    xml.writeStartElement("Vocabulary");
     for(unsigned int i = 0; i < this->vocabulary.size(); i++) {
         xml.writeStartElement("word");
         xml.writeAttribute("id", QString::number(i));
@@ -167,12 +224,34 @@ bool Vocabulary::writeVocabToFileXML() {
         xml.writeEndElement();
     }
 
+    xml.writeEndElement();
+
     xml.writeEndDocument();
 
     file.close();
     return true;
 }
 
+bool Vocabulary::writeDomDocumentToFile() {
+    QString dir_path = QCoreApplication::applicationDirPath();
+    QDir dir(dir_path);
+    QString path = dir.relativeFilePath("../vocab.xml");
+    QFile file(path);
+
+    // Save content back to the file
+    if (!file.open(QIODevice::Truncate | QIODevice::WriteOnly)) {
+        QMessageBox::warning(this->gui,
+            "Writing Problem",
+            "Couldn't write Vocabulary to file",
+            QMessageBox::Ok);
+        return false;
+    }
+
+    QByteArray xml = this->doc.toByteArray();
+    file.write(xml);
+    file.close();
+
+}
 // choose a word from the ready list randomly
 
 Word * Vocabulary::randomlyChooseWord() {
@@ -191,7 +270,7 @@ Vocabulary::Vocabulary(Phase6_GUI * gui) {
 	this->gui = gui;
 
 	// init vocab and ready
-    this->readVocabFromFile();
+    this->readVocabFromFileXML();
 
     this->generator.seed(time(0));
 }
@@ -201,7 +280,33 @@ Vocabulary::Vocabulary(Phase6_GUI * gui) {
 
 void Vocabulary::addWord(std::vector<QString> lang1, std::vector<QString> lang2) {
     Word* word = new Word(lang1, lang2);
+    word->id = this->current_id;
     this->vocabulary.push_back(word);
+
+    QDomNode root = doc.namedItem("Vocabulary");
+
+    QDomElement wordElement = this->doc.createElement("word");
+    wordElement.setAttributeNode(doc.createAttribute("id"));
+    wordElement.setAttributeNode(doc.createAttribute("time"));
+    wordElement.setAttributeNode(doc.createAttribute("phase"));
+
+    wordElement.setAttribute("id", QString::number(this->current_id));
+    wordElement.setAttribute("time", QString::number(0));
+    wordElement.setAttribute("phase", QString::number(1));
+
+    for(int i = 0; i < lang1.size(); i++) {
+        QDomElement langElement = this->doc.createElement("lang1");
+        langElement.setNodeValue(lang1[i]);
+        wordElement.appendChild(langElement);
+    }
+
+    for(int i = 0; i < lang1.size(); i++) {
+        QDomElement langElement = this->doc.createElement("lang2");
+        langElement.setNodeValue(lang2[i]);
+        wordElement.appendChild(langElement);
+    }
+
+    current_id++;
 }
 
 void Vocabulary::editWord(Word* word, std::vector<QString> lang1, std::vector<QString> lang2)
@@ -243,7 +348,6 @@ void Vocabulary::giveAnswer(Word* word, bool answer) {
 // done studying
 
 void Vocabulary::finish() {
-    this->writeVocabToFile();
     this->writeVocabToFileXML();
 }
 
