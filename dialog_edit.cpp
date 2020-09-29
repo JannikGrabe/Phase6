@@ -91,8 +91,7 @@ void Dialog_Edit::on_pb_save_clicked()
                                   Word::toString(lang1_words) + " - " + Word::toString(lang2_words) + " speichern?",
                                   QMessageBox::Yes|QMessageBox::Cancel);
     if (reply == QMessageBox::Yes) {
-        this->word->lang1 = lang1_words;
-        this->word->lang2 = lang2_words;
+        this->phase6_gui->vocab->editWord(this->word, lang1_words, lang2_words);
         this->close();
     }
 

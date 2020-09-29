@@ -36,6 +36,9 @@ public:
 	// add word to vocab and ready
     void addWord(std::vector<QString> lang1, std::vector<QString> lang2);
 
+    // edit word
+    void editWord(Word* word, std::vector<QString> lang1, std::vector<QString> lang2);
+
 	// delete worb from vocab and ready
     void deleteWord(Word* word);
 

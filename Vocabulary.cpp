@@ -65,6 +65,8 @@ void Vocabulary::updateReady() {
 
 bool Vocabulary::readVocabFromFile() {
 
+    this->vocabulary.clear();
+
     QString dir_path = QCoreApplication::applicationDirPath();
     QDir dir(dir_path);
     QString path = dir.relativeFilePath("../vocab.voc");
@@ -163,7 +165,13 @@ Vocabulary::Vocabulary(Phase6_GUI * gui) {
 
 void Vocabulary::addWord(std::vector<QString> lang1, std::vector<QString> lang2) {
     Word* word = new Word(lang1, lang2);
-	this->vocabulary.push_back(word);
+    this->vocabulary.push_back(word);
+}
+
+void Vocabulary::editWord(Word* word, std::vector<QString> lang1, std::vector<QString> lang2)
+{
+    word->lang1 = lang1;
+    word->lang2 = lang2;
 }
 
 void Vocabulary::deleteWord(Word *word) {
