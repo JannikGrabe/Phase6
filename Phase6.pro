@@ -29,17 +29,19 @@ SOURCES += \
         phase6_gui.cpp \
     Vocabulary.cpp \
     Word.cpp \
-    dialog_app.cpp \
     dialog_edit.cpp \
-    dialog_overview.cpp
+    dialog_overview.cpp \
+    wordgroupbox.cpp \
+    dialog_add.cpp
 
 HEADERS += \
         phase6_gui.h \
     Vocabulary.h \
     Word.h \
-    dialog_app.h \
     dialog_edit.h \
-    dialog_overview.h
+    dialog_overview.h \
+    wordgroupbox.h \
+    dialog_add.h
 
 FORMS += \
         phase6_gui.ui \

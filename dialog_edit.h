@@ -31,6 +31,9 @@ private slots:
 
     void on_pb_plus_lang2_clicked();
 
+signals:
+    void word_edited(int id);
+
 private:
     Ui::Dialog_Edit *ui;
 

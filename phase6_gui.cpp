@@ -17,11 +17,21 @@ Phase6_GUI::~Phase6_GUI()
 {
     delete this->vocab;
     delete ui;
+    if(this->dialog_add != nullptr) {
+        delete this->dialog_add;
+    }
+    if(this->dialog_edit != nullptr) {
+        delete this->dialog_edit;
+    }
+    if(this->dialog_overview != nullptr) {
+        delete this->dialog_overview;
+    }
 }
 
 void Phase6_GUI::on_pb_add_clicked()
 {
-    this->dialog_add = new Dialog_App(this);
+    if(this->dialog_add == nullptr)
+        this->dialog_add = new Dialog_Add(this);
     dialog_add->show();
 }
 
@@ -55,6 +65,10 @@ void Phase6_GUI::on_pb_edit_clicked()
 {
     if(this->currentWord == nullptr) {
         return;
+    }
+
+    if(this->dialog_edit != nullptr) {
+        delete this->dialog_edit;
     }
 
     this->dialog_edit = new Dialog_Edit(this, this->currentWord);
@@ -211,6 +225,9 @@ void Phase6_GUI::on_le_answer_returnPressed()
 
 void Phase6_GUI::on_pb_overview_clicked()
 {
+    if(this->dialog_overview != nullptr)  {
+        delete this->dialog_overview;
+    }
     this->dialog_overview = new Dialog_Overview(this);
     this->dialog_overview->show();
 }

@@ -15,6 +15,8 @@ private:
     unsigned int current_id = 0;
     QDomDocument doc;
 
+    std::vector<int> words_per_phase;
+
 	Phase6_GUI* gui = nullptr;
 
     std::random_device dev;
@@ -45,6 +47,7 @@ public:
 
 	// add word to vocab and ready
     void addWord(std::vector<QString> lang1, std::vector<QString> lang2);
+    void addWord(Word *word);
 
     // edit word
     void editWord(Word* word, std::vector<QString> lang1, std::vector<QString> lang2);
@@ -55,6 +58,18 @@ public:
 	// pick and remove one word from ready
     Word* drawWord();
 
+    std::vector<Word *> find(QString text, bool case_sensitive = true, bool partial = false);
+
+    Word* find(int id) {
+        for(Word* word : this->vocabulary) {
+            if(word->id == id) {
+                return word;
+            }
+        }
+
+        return nullptr;
+    }
+
     // receives the answer from the gui
     void giveAnswer(Word* word, bool answer);
 
@@ -63,9 +78,11 @@ public:
 
     int getTimeUntilNext();
 
+    const std::vector<int> get_words_per_phase();
+
     bool isEmpty();
 
-    std::vector<const Word *> getVocabulary() const;
+    std::vector<Word *> getVocabulary();
 
     static int getHoursOfPhase(int phase);
 

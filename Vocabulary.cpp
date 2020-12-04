@@ -158,9 +158,12 @@ bool Vocabulary::readVocabFromFileXML() {
        Word* word = new Word(lang1, lang2);
        word->id = wordElement.attributes().namedItem("id").nodeValue().toUInt();
        word->setTime(wordElement.attributes().namedItem("time").nodeValue().toUInt());
-       word->setPhase(wordElement.attributes().namedItem("phase").nodeValue().toInt());
+       int phase = wordElement.attributes().namedItem("phase").nodeValue().toInt();
+       word->setPhase(phase);
        this->vocabulary.push_back(word);
        this->current_id = i;
+       this->words_per_phase[phase]++;
+       this->words_per_phase[0]++;
    }
 
    this->current_id++;
@@ -305,6 +308,7 @@ Word * Vocabulary::randomlyChooseWord() {
 Vocabulary::Vocabulary(Phase6_GUI * gui) {
 	this->gui = gui;
 
+    this->words_per_phase = std::vector<int>(7, 0);
 	// init vocab and ready
     this->readVocabFromFileXML();
 
@@ -327,6 +331,26 @@ void Vocabulary::addWord(std::vector<QString> lang1, std::vector<QString> lang2)
     this->writeDomDocumentToFile();
 
     current_id++;
+
+    this->words_per_phase[0]++;
+    this->words_per_phase[1]++;
+}
+
+void Vocabulary::addWord(Word* word) {
+    word->id = this->current_id;
+    this->vocabulary.push_back(word);
+
+    QDomElement wordElement = this->createXMLWordElement(word);
+
+    QDomNode root = doc.namedItem("Vocabulary");
+    root.appendChild(wordElement);
+
+    this->writeDomDocumentToFile();
+
+    current_id++;
+
+    this->words_per_phase[0]++;
+    this->words_per_phase[1]++;
 }
 
 void Vocabulary::editWord(Word* word, std::vector<QString> lang1, std::vector<QString> lang2)
@@ -350,6 +374,9 @@ void Vocabulary::editWord(Word* word, std::vector<QString> lang1, std::vector<QS
 }
 
 void Vocabulary::deleteWord(Word *word) {
+    this->words_per_phase[0]--;
+    this->words_per_phase[word->getPhase()]--;
+
     unsigned int word_id = word->id;
 
     std::vector<Word*>::iterator position = std::find(this->vocabulary.begin(), this->vocabulary.end(), word);
@@ -383,15 +410,33 @@ Word* Vocabulary::drawWord() {
     return word;
 }
 
+std::vector<Word*> Vocabulary::find(QString text, bool case_sensitive, bool partial)
+{
+    std::vector<Word*> words;
+
+    for(Word* word : this->vocabulary) {
+        if(word->compare(text, case_sensitive, partial)) {
+            words.push_back(word);
+        }
+    }
+
+    return words;
+}
+
+
 void Vocabulary::giveAnswer(Word* word, bool answer) {
+    this->words_per_phase[word->getPhase()]--;
+
     if (answer) {
         word->incPhase();
         word->setTime();
     }
     else {
         word->resetPhase();
+
     }
 
+    this->words_per_phase[word->getPhase()]++;
     this->editWord(word, word->lang1, word->lang2);
 }
 
@@ -419,17 +464,21 @@ int Vocabulary::getTimeUntilNext()
     return minTime;
 }
 
+const std::vector<int> Vocabulary::get_words_per_phase() {
+    return this->words_per_phase;
+}
+
 bool Vocabulary::isEmpty()
 {
     return this->vocabulary.size() == 0;
 }
 
-std::vector<const Word *> Vocabulary::getVocabulary() const
+std::vector<Word *> Vocabulary::getVocabulary()
 {
-    std::vector<const Word*> constVocab;
+    std::vector<Word*> constVocab;
 
     foreach(Word * word, this->vocabulary) {
-        constVocab.push_back(dynamic_cast<const Word*>(word));
+        constVocab.push_back(word);
     }
 
     return constVocab;
@@ -454,3 +503,5 @@ int Vocabulary::getHoursOfPhase(int phase)
 
     return 0;
 }
+
+

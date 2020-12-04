@@ -3,6 +3,7 @@
 #include "phase6_gui.h"
 
 #include <QMessageBox>
+#include <QLayout>
 
 Dialog_Edit::Dialog_Edit(Phase6_GUI *phase6_gui, Word* word) :
     QDialog(phase6_gui),
@@ -92,6 +93,7 @@ void Dialog_Edit::on_pb_save_clicked()
                                   QMessageBox::Yes|QMessageBox::Cancel);
     if (reply == QMessageBox::Yes) {
         this->phase6_gui->vocab->editWord(this->word, lang1_words, lang2_words);
+        emit this->word_edited(this->word->id);
         this->close();
     }
 
@@ -109,7 +111,9 @@ void Dialog_Edit::on_pb_delete_clicked()
                                   "Dieses Wort löschen?",
                                   QMessageBox::Yes|QMessageBox::Cancel);
     if (reply == QMessageBox::Yes) {
+        int id = this->word->id;
         this->phase6_gui->vocab->deleteWord(this->word);
+        emit this->word_edited(id);
         this->close();
     }
 }

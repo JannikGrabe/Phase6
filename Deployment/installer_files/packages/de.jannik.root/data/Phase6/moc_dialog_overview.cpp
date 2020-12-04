@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Dialog_Overview_t {
-    QByteArrayData data[3];
-    char stringdata0[37];
+    QByteArrayData data[10];
+    char stringdata0[129];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,11 +33,20 @@ static const qt_meta_stringdata_Dialog_Overview_t qt_meta_stringdata_Dialog_Over
     {
 QT_MOC_LITERAL(0, 0, 15), // "Dialog_Overview"
 QT_MOC_LITERAL(1, 16, 19), // "on_pb_close_clicked"
-QT_MOC_LITERAL(2, 36, 0) // ""
+QT_MOC_LITERAL(2, 36, 0), // ""
+QT_MOC_LITERAL(3, 37, 24), // "on_le_search_textChanged"
+QT_MOC_LITERAL(4, 62, 4), // "text"
+QT_MOC_LITERAL(5, 67, 14), // "on_word_edited"
+QT_MOC_LITERAL(6, 82, 2), // "id"
+QT_MOC_LITERAL(7, 85, 32), // "on_tw_overview_cellDoubleClicked"
+QT_MOC_LITERAL(8, 118, 3), // "row"
+QT_MOC_LITERAL(9, 122, 6) // "column"
 
     },
     "Dialog_Overview\0on_pb_close_clicked\0"
-    ""
+    "\0on_le_search_textChanged\0text\0"
+    "on_word_edited\0id\0on_tw_overview_cellDoubleClicked\0"
+    "row\0column"
 };
 #undef QT_MOC_LITERAL
 
@@ -47,7 +56,7 @@ static const uint qt_meta_data_Dialog_Overview[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -55,10 +64,16 @@ static const uint qt_meta_data_Dialog_Overview[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x08 /* Private */,
+       1,    0,   34,    2, 0x08 /* Private */,
+       3,    1,   35,    2, 0x08 /* Private */,
+       5,    1,   38,    2, 0x08 /* Private */,
+       7,    2,   41,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    4,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    8,    9,
 
        0        // eod
 };
@@ -70,10 +85,12 @@ void Dialog_Overview::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->on_pb_close_clicked(); break;
+        case 1: _t->on_le_search_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 2: _t->on_word_edited((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->on_tw_overview_cellDoubleClicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 QT_INIT_METAOBJECT const QMetaObject Dialog_Overview::staticMetaObject = { {
@@ -105,13 +122,13 @@ int Dialog_Overview::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 4;
     }
     return _id;
 }

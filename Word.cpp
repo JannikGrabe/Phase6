@@ -42,6 +42,38 @@ Word::Word(std::vector<QString> lang1, std::vector<QString> lang2) : lang1(lang1
 {
 }
 
+bool Word::compare(QString text, bool case_sensitiv, bool partial) {
+
+    for(QString word : this->lang1) {
+        if(partial) {
+            if(case_sensitiv && word.contains(text, Qt::CaseSensitive)) {
+                return true;
+            } else if (word.contains(text, Qt::CaseInsensitive)) {
+                return true;
+            }
+        } else if(case_sensitiv && word.compare(text, Qt::CaseSensitive) == 0) {
+            return true;
+        } else if(word.compare(text, Qt::CaseInsensitive) == 0) {
+            return true;
+        }
+    }
+
+    for(QString word : this->lang2) {
+        if(partial) {
+            if(case_sensitiv && word.contains(text, Qt::CaseSensitive)) {
+                return true;
+            } else if (word.contains(text, Qt::CaseInsensitive)) {
+                return true;
+            }
+        } else if(case_sensitiv && word.compare(text, Qt::CaseSensitive) == 0) {
+            return true;
+        } else if(word.compare(text, Qt::CaseInsensitive) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
 QString Word::toString(std::vector<QString> wordList)
 {
     QString s = "";

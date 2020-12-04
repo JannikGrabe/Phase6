@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <Vocabulary.h>
-#include "dialog_app.h"
+#include "dialog_add.h"
 #include "dialog_edit.h"
 #include "dialog_overview.h"
 
@@ -19,7 +19,7 @@ public:
     explicit Phase6_GUI(QWidget *parent = nullptr);
     ~Phase6_GUI();
 
-    Vocabulary* vocab;
+    Vocabulary* vocab = nullptr;
 
 private slots:
     void on_pb_add_clicked();
@@ -41,9 +41,9 @@ private:
 
     Word* currentWord = nullptr;
 
-    Dialog_App* dialog_add;
-    Dialog_Edit* dialog_edit;
-    Dialog_Overview* dialog_overview;
+    Dialog_Add* dialog_add = nullptr;
+    Dialog_Edit* dialog_edit = nullptr;
+    Dialog_Overview* dialog_overview = nullptr;
 
     std::random_device dev;
 

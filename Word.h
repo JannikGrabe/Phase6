@@ -20,6 +20,8 @@ public :
 
     Word(std::vector<QString> lang1, std::vector<QString> lang2);
 
+    bool compare(QString text, bool case_sensitiv = true, bool partial = false);
+
     QString toString();
     static QString toString(std::vector<QString> wordList);
 private:
