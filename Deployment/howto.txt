@@ -1,0 +1,20 @@
+1. windeployqt in release folder:
+	windeployqt C:\path_to_build_folder\release
+
+
+2. change name from release to Phase6 and replace old package data folder
+	replace here: Phase6\Deployment\installer_files\packages\de.jannik.root\data
+
+3. go to package.xml and change version number
+	change here: Phase6\Deployment\installer_files\packages\de.jannik.root\meta\package.xml
+
+4. update repository url in config xml to the branch that contains new version 
+	update here:Phase6\Deployment\installer_files\config\config.xml
+
+5. delete old package_repo 
+	delete this: Phase6\Deployment\installer_files\package_repo
+
+6. create new package repo (needs to be called package_repo)
+	create like this: C:\Qt\QtIFW-3.1.1\bin\repogen.exe -p C:\Users\janni\Documents\Phase6\Deployment\installer_files\packages C:\Users\janni\Documents\Phase6\Deployment\installer_files\package_repo
+
+7. push to git
