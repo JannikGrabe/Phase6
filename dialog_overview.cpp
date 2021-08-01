@@ -106,6 +106,8 @@ void Dialog_Overview::fill_row(int row, Word *word)
     int hours_until_asked = Vocabulary::getHoursOfPhase(phase) - time_passed;
     hours_until_asked = hours_until_asked < 0 ? 0 : hours_until_asked;
 
+    hours_until_asked = 0;
+
     item = new QTableWidgetItem(QString::number(hours_until_asked));
     item->setFlags(item->flags() ^ Qt::ItemIsEditable);
     this->ui->tw_overview->setItem(row, 3, item);
