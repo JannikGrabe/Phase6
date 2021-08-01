@@ -294,7 +294,8 @@ QDomElement Vocabulary::createXMLWordElement(Word* word) {
 }
 
 Word * Vocabulary::randomlyChooseWord() {
-    unsigned int size = this->ready.size();
+    //unsigned int size = this->ready.size();
+    unsigned int size = this->vocabulary.size();
 
 	if (size == 0) {
 		return nullptr;
@@ -302,7 +303,8 @@ Word * Vocabulary::randomlyChooseWord() {
 
     std::uniform_int_distribution<unsigned int> distribution(0, size - 1 );
 
-    return ready[distribution(generator)];
+    //return ready[distribution(generator)];
+    return vocabulary[distribution(generator)];
 }
 
 Vocabulary::Vocabulary(Phase6_GUI * gui) {

@@ -207,6 +207,8 @@ void Phase6_GUI::on_le_answer_returnPressed()
             break;
         }
 
+        wait = "bald";
+
         te->append("Es wird in "+ wait + " erneut abgefragt.");
 
     } else {
