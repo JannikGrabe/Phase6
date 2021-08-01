@@ -8,13 +8,14 @@
 3. go to package.xml and change version number
 	change here: Phase6\Deployment\installer_files\packages\de.jannik.root\meta\package.xml
 
-4. update repository url in config xml to the branch that contains new version 
-	update here:Phase6\Deployment\installer_files\config\config.xml
-
-5. delete old package_repo 
+4. delete old package_repo 
 	delete this: Phase6\Deployment\installer_files\package_repo
 
-6. create new package repo (needs to be called package_repo)
+5. create new package repo (needs to be called package_repo)
 	create like this: C:\Qt\QtIFW-3.1.1\bin\repogen.exe -p C:\Users\janni\Documents\Phase6\Deployment\installer_files\packages C:\Users\janni\Documents\Phase6\Deployment\installer_files\package_repo
 
-7. push to git
+6. if new Deployment files are on a different branch commit and checkout to master. then checkout the Deployment folder from current development branch
+	in master: git checkout development_branch Deployment
+			   git commit -m "merged deployment files from development branch"
+
+7. push to remote master
